@@ -16,7 +16,7 @@ import com.payment_processing_service.dto.StripeSessionResponseDTO;
 import com.payment_processing_service.service.PaymentProcessingService;
 
 @RestController
-@RequestMapping("/payments")
+@RequestMapping("/processingservice/v1/payments")
 public class PaymentProcessingController {
 
     private static final Logger logger =

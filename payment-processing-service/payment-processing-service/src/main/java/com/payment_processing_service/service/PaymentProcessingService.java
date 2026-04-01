@@ -36,7 +36,7 @@ public class PaymentProcessingService {
 
 
     private final String STRIPE_URL =
-            "http://localhost:8083/stripe/create-session";
+            "http://localhost:8083/stripeservice/v1/stripe/create-session";
 
 
     public StripeSessionResponseDTO
