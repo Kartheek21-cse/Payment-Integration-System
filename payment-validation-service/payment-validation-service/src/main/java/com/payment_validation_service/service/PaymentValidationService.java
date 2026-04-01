@@ -32,7 +32,7 @@ public class PaymentValidationService {
     private RestTemplate restTemplate;
 
     private final String PROCESSING_URL =
-            "http://localhost:8082/payments/process";
+            "http://localhost:8082/processingservice/v1/payments/process";
 
 
     public PaymentTransactionDTO validatePayment(

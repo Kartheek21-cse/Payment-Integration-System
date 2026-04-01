@@ -14,7 +14,7 @@ import com.payment_validation_service.dto.PaymentTransactionDTO;
 import com.payment_validation_service.service.PaymentValidationService;
 
 @RestController
-@RequestMapping("/validate")
+@RequestMapping("/validationservice/v1/validate")
 public class PaymentValidationController {
 
     private static final Logger logger =
