@@ -1,0 +1,9 @@
+server:
+  port: 8083
+
+
+logging:
+  level:
+    root: INFO
+    com.stripe_provider_service: DEBUG
+ 

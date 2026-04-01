@@ -1,0 +1,17 @@
+
+server:
+  port: 8082
+
+spring:
+  application:
+    name: payment_processing_service
+
+  data:
+    mongodb:
+      uri: mongodb+srv://payment_user:Karthik25%40cse@my-first-project-spring.urw09pj.mongodb.net/payment_processing_db?retryWrites=true&w=majority&appName=My-First-Project-SpringBoot
+      auto-index-creation: true
+
+logging:
+  level:
+    root: INFO
+    com.payment_processing_service: DEBUG

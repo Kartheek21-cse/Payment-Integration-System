@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: payment-validation-service
+
+  data:
+    mongodb:
+      uri: mongodb+srv://payment_user:Karthik25%40cse@my-first-project-spring.urw09pj.mongodb.net/payment_validation_db?retryWrites=true&w=majority&appName=My-First-Project-SpringBoot
+      auto-index-creation: true
+
+logging:
+  level:
+    root: INFO
+    com.payment_validation_service: DEBUG
