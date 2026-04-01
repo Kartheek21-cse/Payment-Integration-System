@@ -19,7 +19,7 @@ import com.stripe.net.Webhook;
 import com.stripe_provider_service.service.StripeWebhookService;
 
 @RestController
-@RequestMapping("/stripe")
+@RequestMapping("/stripeservice/v1/stripe")
 public class StripeWebhookController {
 
     private static final Logger logger=

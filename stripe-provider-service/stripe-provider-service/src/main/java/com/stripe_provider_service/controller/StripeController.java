@@ -16,7 +16,7 @@ import com.stripe_provider_service.dto.StripeSessionResponseDTO;
 import com.stripe_provider_service.service.StripeService;
 
 @RestController
-@RequestMapping("/stripe")
+@RequestMapping("/stripeservice/v1/stripe")
 public class StripeController {
 
     private static final Logger logger=

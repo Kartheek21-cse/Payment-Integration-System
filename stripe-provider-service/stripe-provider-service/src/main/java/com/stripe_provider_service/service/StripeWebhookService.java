@@ -22,7 +22,7 @@ public class StripeWebhookService {
 
 
     private final String PROCESSING_URL=
-            "http://localhost:8082/payments/status";
+            "http://localhost:8082/processingservice/v1/payments/status";
 
 
     public void notifyPaymentSuccess(
