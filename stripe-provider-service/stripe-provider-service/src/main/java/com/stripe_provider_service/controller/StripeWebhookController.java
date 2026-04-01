@@ -1,5 +1,7 @@
 package com.stripe_provider_service.controller;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.stripe.model.Event;
+import com.stripe.model.EventDataObjectDeserializer;
+import com.stripe.model.StripeObject;
 import com.stripe.model.checkout.Session;
 import com.stripe.net.Webhook;
 
@@ -38,54 +42,49 @@ public class StripeWebhookController {
 
 
     @PostMapping("/webhook")
-    public ResponseEntity<String>
-        handleWebhook(
+    public ResponseEntity<String> handleWebhook(
 
             @RequestBody String payload,
+            @RequestHeader("Stripe-Signature") String signature)
+            throws Exception {
 
-            @RequestHeader(
-                    "Stripe-Signature")
-            String signature)
-            throws Exception{
+        Event event = Webhook.constructEvent(
+                payload,
+                signature,
+                webhookSecret);
 
+        logger.info("Stripe event received {}", event.getType());
 
-        Event event=
-                Webhook.constructEvent(
+        if ("checkout.session.completed".equals(event.getType())) {
 
-                        payload,
+            EventDataObjectDeserializer dataDeserializer =
+                    event.getDataObjectDeserializer();
 
-                        signature,
+            Optional<StripeObject> stripeObject =
+                    dataDeserializer.getObject();
 
-                        webhookSecret);
+            Session session = null;
 
+            if (stripeObject.isPresent()) {
 
+                session = (Session) stripeObject.get();
 
-        if(event.getType()
-                .equals(
-                  "checkout.session.completed")){
+            } else {
 
+                // fallback parsing
+                StripeObject rawObject =
+                        dataDeserializer.deserializeUnsafe();
 
-            Session session=
-
-                    (Session)
-                    event.getDataObjectDeserializer()
-
-                    .getObject()
-
-                    .get();
-
+                session = (Session) rawObject;
+            }
 
             logger.info(
-                    "payment success {}",
+                    "Payment success session {}",
                     session.getId());
 
-
             webhookService.notifyPaymentSuccess(
-
                     session.getId());
         }
 
-
         return ResponseEntity.ok("received");
-    }
-}
+    }}
